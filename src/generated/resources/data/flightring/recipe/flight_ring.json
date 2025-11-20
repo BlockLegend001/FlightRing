@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "minecraft:blaze_rod",
+    "F": "minecraft:feather",
+    "G": "minecraft:gold_block",
+    "N": "minecraft:nether_star"
+  },
+  "pattern": [
+    "FGF",
+    "BNB",
+    "FGF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "flightring:flight_ring"
+  }
+}
