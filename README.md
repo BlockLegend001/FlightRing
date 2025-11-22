@@ -1,4 +1,4 @@
-# Exp Ore
+# Flight Ring
 
 This mod adds the Flight Ring that allows you to fly (Like the Angel Ring of Extra Utilities)
 
