@@ -4,8 +4,14 @@
   "version": "${version}",
   "name": "FlightRing",
   "description": "Adds the Flight Ring that allows you to fly (Like the Angel Ring of Extra Utilities)",
-  "authors": [],
-  "contact": {},
+  "authors": [
+    "Block_Legend001"
+  ],
+  "contact": {
+    "homepage": "https://blocklegend001.dev",
+    "sources": "https://github.com/BlockLegend001/FlightRing",
+    "issues": "https://github.com/BlockLegend001/FlightRing/issues"
+  },
   "license": "All-Rights-Reserved",
   "icon": "assets/flightring/icon.png",
   "environment": "*",
@@ -20,6 +26,13 @@
       "com.blocklegend001.flightring.FlightRing"
     ]
   },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/jVmUTGFMX5"
+      }
+    }
+  },
   "mixins": [
     "flightring.mixins.json"
   ],
@@ -27,6 +40,8 @@
     "fabricloader": ">=0.15.11",
     "minecraft": "~1.21",
     "java": ">=21",
-    "fabric-api": "*"
+    "fabric-api": "*",
+    "trinkets": ">=${trinkets_version}",
+    "accessories": ">=${accessories_version}"
   }
 }
