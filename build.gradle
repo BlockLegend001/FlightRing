@@ -81,21 +81,25 @@ dependencies {
 
 processResources {
     inputs.property "version", project.version
+    inputs.property "trinkets_version", project.trinkets_version
+    inputs.property "accessories_version", project.accessories_version
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand "version": project.version,
+                "trinkets_version": project.trinkets_version,
+                "accessories_version": project.accessories_version
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
+    it.options.release = 17
 }
 
 java {
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
@@ -135,12 +139,28 @@ publishMods {
         clientRequired = true
         serverRequired = true
         requires("fabric-api")
+
+        requires {
+            slug = "accessories"
+        }
+
+        requires {
+            slug = "trinkets"
+        }
     }
     modrinth {
         projectId = 'PQlYtuln'
         accessToken = providers.environmentVariable('MODRINTH_TOKEN')
         minecraftVersions.add(minecraft_version)
         requires("fabric-api")
+
+        requires {
+            slug = "accessories"
+        }
+
+        requires {
+            slug = "trinkets"
+        }
     }
 }
 
