@@ -77,9 +77,13 @@ modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 processResources {
     inputs.property "version", project.version
+    inputs.property "trinkets_version", project.trinkets_version
+    inputs.property "accessories_version", project.accessories_version
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand "version": project.version,
+                "trinkets_version": project.trinkets_version,
+                "accessories_version": project.accessories_version
     }
 }
 
@@ -131,12 +135,28 @@ publishMods {
         clientRequired = true
         serverRequired = true
         requires("fabric-api")
+
+        requires {
+            slug = "accessories"
+        }
+
+        requires {
+            slug = "trinkets"
+        }
     }
     modrinth {
         projectId = 'PQlYtuln'
         accessToken = providers.environmentVariable('MODRINTH_TOKEN')
         minecraftVersions.add(minecraft_version)
         requires("fabric-api")
+
+        requires {
+            slug = "accessories"
+        }
+
+        requires {
+            slug = "trinkets"
+        }
     }
 }
 
