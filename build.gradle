@@ -107,26 +107,28 @@ dependencies {
     implementation("io.wispforest:accessories-neoforge:${project.accessories_version}")
 }
 
-var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
-    var replaceProperties = [minecraft_version      : minecraft_version,
-                             minecraft_version_range: minecraft_version_range,
-                             neo_version            : neo_version,
-                             neo_version_range      : neo_version_range,
-                             loader_version_range   : loader_version_range,
-                             mod_id                 : mod_id,
-                             mod_name               : mod_name,
-                             mod_license            : mod_license,
-                             mod_version            : mod_version,
-                             mod_authors            : mod_authors,
-                             mod_description        : mod_description]
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description,
+            accessories_version    : accessories_version,
+            curios_version         : curios_version
+    ]
     inputs.properties replaceProperties
-    expand replaceProperties
-    from "src/main/templates"
-    into "build/generated/sources/modMetadata"
-}
 
-sourceSets.main.resources.srcDir generateModMetadata
-neoForge.ideSyncTask generateModMetadata
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
+}
 
 publishing {
     publications {
@@ -165,11 +167,27 @@ publishMods {
         minecraftVersions.add(minecraft_version)
         clientRequired = true
         serverRequired = true
+
+        requires {
+            slug = "accessories"
+        }
+
+        requires {
+            slug = "curios"
+        }
     }
     modrinth {
         projectId = 'PQlYtuln'
         accessToken = providers.environmentVariable('MODRINTH_TOKEN')
         minecraftVersions.add(minecraft_version)
+
+        requires {
+            slug = "accessories"
+        }
+
+        requires {
+            slug = "curios"
+        }
     }
 }
 
